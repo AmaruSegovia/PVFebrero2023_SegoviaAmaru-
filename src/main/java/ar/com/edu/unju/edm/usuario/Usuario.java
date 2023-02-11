@@ -2,8 +2,6 @@ package ar.com.edu.unju.edm.usuario;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +9,7 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long dni;
 	
 	@Column(name = "nombre",nullable = false,length = 50)
 	private String nombre;
@@ -22,36 +19,28 @@ public class Usuario {
 	
 	@Column(name = "email",nullable = false,length = 50,unique = true)
 	private String email;
+	@Column(name = "tipo",nullable = false,length = 50)
+	private String tipo;
 
 	public Usuario() {
 		super();
 	}
 
-	
-	
-	public Usuario(String nombre, String apellido, String email) {
+	public Usuario(long dni, String nombre, String apellido, String email, String tipo) {
 		super();
+		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
+		this.tipo = tipo;
 	}
 
-
-
-	public Usuario(long id, String nombre, String apellido, String email) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
+	public long getDni() {
+		return dni;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setDni(long dni) {
+		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -78,9 +67,16 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public String getTipo(){
+		return tipo;
+	}
+
+	public void setTipo(String tipo){
+		this.tipo= tipo;
+	}
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + "]";
+		return "Usuario [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + "]";
 	}
 	
 }
