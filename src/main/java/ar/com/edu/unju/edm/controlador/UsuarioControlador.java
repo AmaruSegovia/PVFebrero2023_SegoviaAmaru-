@@ -39,13 +39,13 @@ public class UsuarioControlador {
 	@GetMapping("/usuarios/editar/{id}")
 	public String mostrarFormularioDeEditar(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("usuario", servicio.obtenerUsuarioporId(id));
-		return "editar_estudiante";
+		return "editar_usuario"; 
 	}
 
 	@PostMapping("/usuarios/{id}")
 	public String actualizarUsuarios(@PathVariable Long id, @ModelAttribute("usuario") Usuario usuario, Model modelo) {
 		Usuario usuarioExistente = servicio.obtenerUsuarioporId(id);
-		usuarioExistente.setId(id);
+		usuarioExistente.setDni(id);
 		usuarioExistente.setNombre(usuario.getNombre());
 		usuarioExistente.setApellido(usuario.getApellido());
 		usuarioExistente.setEmail(usuario.getEmail());
