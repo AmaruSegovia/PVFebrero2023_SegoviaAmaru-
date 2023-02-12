@@ -16,7 +16,11 @@ public class UsuarioControlador {
 
 	@Autowired
 	private UsuarioServicio servicio;
+	@GetMapping("/login")
+	public String login(){
 
+		return "index";
+	}
 	@GetMapping({ "usuarios", "/" })
 	public String listarUsuarios(Model modelo) {
 		modelo.addAttribute("usuarios", servicio.listarTodosLosUsuarios());
@@ -48,8 +52,6 @@ public class UsuarioControlador {
 		usuarioExistente.setDni(id);
 		usuarioExistente.setNombre(usuario.getNombre());
 		usuarioExistente.setApellido(usuario.getApellido());
-		usuarioExistente.setEmail(usuario.getEmail());
-
 		servicio.actualizarUsuario(usuarioExistente);
 		return "redirect:/usuarios";
 	}
@@ -60,4 +62,8 @@ public class UsuarioControlador {
 		return "redirect:/usuarios";
 	}
 
+	@GetMapping({ "usuarios/nivel1"})
+	public String nivel1(Model modelo) {
+		return "nivel1";
+	}
 }

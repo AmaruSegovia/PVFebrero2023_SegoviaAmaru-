@@ -1,4 +1,4 @@
-package ar.com.edu.unju.edm.servicio;
+package ar.com.edu.unju.edm.servicio.imp;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.edu.unju.edm.repositorio.UsuarioRepositorio;
+import ar.com.edu.unju.edm.servicio.UsuarioServicio;
 import ar.com.edu.unju.edm.usuario.Usuario;
 
 @Service

@@ -32,20 +32,20 @@
 					<th scope="col">DNI</th>
 					<th scope="col">Nombre</th>
 					<th scope="col">Apellido</th>
-					<th scope="col">Correo</th>
+					<th scope="col">fecha_nac</th>
 					<th scope="col">Tipo</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="usuario : ${usuarios}">
-					<th scope="row">1</th>
+					<td th:text="${usuario.dni}"></td>
 					<td th:text="${usuario.nombre}">Nombre</td>
 					<td th:text="${usuario.apellido}">Apellido</td>
-					<td th:text="${usuario.email}">Email</td>
+					<td th:text="${usuario.fecha_nac}">fecha_nac</td>
 					<td th:text="${usuario.tipo}">Tipo</td>
 					<td>
-					<a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-info">Editar</a>
-					<a th:href="@{/usuarios/{id}(id=${usuario.id})}" class="btn btn-danger">Eliminar</a>
+					<a th:href="@{/usuarios/editar/{id}(id=${usuario.dni})}" class="btn btn-info">Editar</a>
+					<a th:href="@{/usuarios/{id}(id=${usuario.dni})}" class="btn btn-danger">Eliminar</a>
 					<a th:href="@{/usuarios}" class="btn btn-warning">Ver Notas</a>
 					</td>
 				</tr>

@@ -17,22 +17,28 @@ public class Usuario {
 	@Column(name = "apellido",nullable = false,length = 50)
 	private String apellido;
 	
-	@Column(name = "email",nullable = false,length = 50,unique = true)
-	private String email;
+	@Column(name = "fecha_nac",nullable = false,length = 50)
+	private String fecha_nac;
 	@Column(name = "tipo",nullable = false,length = 50)
 	private String tipo;
+	@Column(name = "contrasena",nullable = false,length = 50)
+	private String password;
+	private Boolean estado;
 
-	public Usuario() {
-		super();
-	}
 
-	public Usuario(long dni, String nombre, String apellido, String email, String tipo) {
-		super();
+	public Usuario(long dni, String nombre, String apellido, String fecha_nac, String tipo, String password,
+			Boolean estado) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.email = email;
+		this.fecha_nac = fecha_nac;
 		this.tipo = tipo;
+		this.password = password;
+		this.estado = estado;
+	}
+
+	public Usuario() {
+		super();
 	}
 
 	public long getDni() {
@@ -59,24 +65,36 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getFecha_nac() {
+		return fecha_nac;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setFecha_nac(String fecha_nac) {
+		this.fecha_nac = fecha_nac;
 	}
 
-	public String getTipo(){
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo){
-		this.tipo= tipo;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
-	@Override
-	public String toString() {
-		return "Usuario [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + "]";
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
 	
 }
