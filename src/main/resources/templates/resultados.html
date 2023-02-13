@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Editar Usuarios</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#"> Edicion de Usuarios</a>
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/listarusuarios}">Control
+						de Usuarios</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<br>
+				<h1 class="text-center">Aqui estan sus resultados</h1>
+                <h2 class="text-center" style="color: darkcyan;">Usted ha contestado</h2>
+                <h1 class="text-center" style="color: midnightblue;">10</h1>
+                <h2 class="text-center" style="color: darkseagreen;">preguntas correctas</h2>
+                <h1 class="text-center">¡Bien hecho!</h1>
+                <br>
+                <button type="button" class="btn btn-info">Volver a hacer cuestionario</button>
+                <br>
+			</div>
+    </div>
+</div>
