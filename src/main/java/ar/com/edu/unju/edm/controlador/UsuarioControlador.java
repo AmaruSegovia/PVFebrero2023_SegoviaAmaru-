@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import ar.com.edu.unju.edm.servicio.UsuarioServicio;
 import ar.com.edu.unju.edm.usuario.Usuario;
@@ -16,12 +17,19 @@ public class UsuarioControlador {
 
 	@Autowired
 	private UsuarioServicio servicio;
+	@Autowired
+	Usuario usuario;
 	@GetMapping("/login")
-	public String login(){
-
+  public ModelAndView getlogin(){
+    ModelAndView vista= new ModelAndView("index");
+    return vista;
+  }
+	@GetMapping("/")
+	public String index(){
 		return "index";
+
 	}
-	@GetMapping({ "usuarios", "/" })
+	@GetMapping({"/listarusuarios"})
 	public String listarUsuarios(Model modelo) {
 		modelo.addAttribute("usuarios", servicio.listarTodosLosUsuarios());
 		return "usuarios";
@@ -37,7 +45,7 @@ public class UsuarioControlador {
 	@PostMapping("/usuarios")
 	public String guardarUsuarios(@ModelAttribute("usuario") Usuario usuario) {
 		servicio.guardarUsuario(usuario);
-		return "redirect:/usuarios";
+		return "redirect:/";
 	}
 
 	@GetMapping("/usuarios/editar/{id}")
@@ -53,17 +61,18 @@ public class UsuarioControlador {
 		usuarioExistente.setNombre(usuario.getNombre());
 		usuarioExistente.setApellido(usuario.getApellido());
 		servicio.actualizarUsuario(usuarioExistente);
-		return "redirect:/usuarios";
+		return "redirect:/listarusuarios";
 	}
 
-	@GetMapping("/usuarios/{id}")
+	@GetMapping("/usuarios/eliminar/{id}")
 	public String eliminarUsuario(@PathVariable Long id) {
 		servicio.eliminarUsuario(id);
-		return "redirect:/usuarios";
+		System.out.println("Eliminado");
+		return "redirect:/listarusuarios";
 	}
 
-	@GetMapping({ "usuarios/nivel1"})
-	public String nivel1(Model modelo) {
-		return "nivel1";
+	@GetMapping("/vernota/{id}")
+	public String vernota(@PathVariable Long id, Model modelo) {
+		return "editar_usuario"; 
 	}
 }
