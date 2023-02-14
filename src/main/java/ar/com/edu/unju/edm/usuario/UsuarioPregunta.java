@@ -19,18 +19,20 @@ public class UsuarioPregunta {
   @GeneratedValue
   (strategy=GenerationType.IDENTITY)
   private Long Id;
-  private Integer Puntaje;
+  private Integer PuntajeTotal;
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "dni")
   private Usuario usuario;
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name ="CodPregunta")
   private Pregunta pregunta;
-  public UsuarioPregunta(Long id, Integer puntaje, Usuario usuario, Pregunta pregunta) {
+  private Integer nivel;
+  public UsuarioPregunta(Long id, Integer puntajeTotal, Usuario usuario, Pregunta pregunta, Integer nivel) {
     Id = id;
-    Puntaje = puntaje;
+    PuntajeTotal = puntajeTotal;
     this.usuario = usuario;
     this.pregunta = pregunta;
+    this.nivel = nivel;
   }
   public UsuarioPregunta() {
   }
@@ -40,11 +42,11 @@ public class UsuarioPregunta {
   public void setId(Long id) {
     Id = id;
   }
-  public Integer getPuntaje() {
-    return Puntaje;
+  public Integer getPuntajeTotal() {
+    return PuntajeTotal;
   }
-  public void setPuntaje(Integer puntaje) {
-    Puntaje = puntaje;
+  public void setPuntajeTotal(Integer puntajeTotal) {
+    PuntajeTotal = puntajeTotal;
   }
   public Usuario getUsuario() {
     return usuario;
@@ -58,4 +60,12 @@ public class UsuarioPregunta {
   public void setPregunta(Pregunta pregunta) {
     this.pregunta = pregunta;
   }
+  public Integer getNivel() {
+    return nivel;
+  }
+  public void setNivel(Integer nivel) {
+    this.nivel = nivel;
+  }
+  
+  
 }

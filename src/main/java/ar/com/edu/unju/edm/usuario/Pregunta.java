@@ -1,33 +1,42 @@
 package ar.com.edu.unju.edm.usuario;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name = "pregunta")
 public class Pregunta {
   @Id
+  @GeneratedValue
+  (strategy=GenerationType.IDENTITY)
   private Long CodPregunta;
   private String Enunciado;
   private Integer Nivel;
   private String Opcion01;
   private String Opcion02;
   private String Opcion03;
-  private String Opcion04;
   private String OpcionCorrecta;
   private Integer Puntaje;
-  public Pregunta(Long codPregunta, String enunciado, Integer nivel, String opcion01, String opcion02, String opcion03,
-      String opcion04, String opcionCorrecta, Integer puntaje) {
+  private Boolean estado;
+  public Pregunta() {
+    super();
+  }
+  public Pregunta(Long codPregunta, String enunciado, Integer nivel, String opcion01, String opcion02, String opcion03, String opcionCorrecta, Integer puntaje,Boolean estado) {
     CodPregunta = codPregunta;
     Enunciado = enunciado;
     Nivel = nivel;
     Opcion01 = opcion01;
     Opcion02 = opcion02;
     Opcion03 = opcion03;
-    Opcion04 = opcion04;
     OpcionCorrecta = opcionCorrecta;
     Puntaje = puntaje;
+    this.estado = estado;
   }
   public Long getCodPregunta() {
     return CodPregunta;
@@ -65,12 +74,6 @@ public class Pregunta {
   public void setOpcion03(String opcion03) {
     Opcion03 = opcion03;
   }
-  public String getOpcion04() {
-    return Opcion04;
-  }
-  public void setOpcion04(String opcion04) {
-    Opcion04 = opcion04;
-  }
   public String getOpcionCorrecta() {
     return OpcionCorrecta;
   }
@@ -82,5 +85,11 @@ public class Pregunta {
   }
   public void setPuntaje(Integer puntaje) {
     Puntaje = puntaje;
+  }
+  public Boolean getEstado() {
+    return estado;
+  }
+  public void setEstado(Boolean estado) {
+    this.estado = estado;
   }
 }

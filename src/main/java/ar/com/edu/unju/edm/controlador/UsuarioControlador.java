@@ -1,6 +1,9 @@
 package ar.com.edu.unju.edm.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.com.edu.unju.edm.servicio.UsuarioPreguntaServicio;
 import ar.com.edu.unju.edm.servicio.UsuarioServicio;
 import ar.com.edu.unju.edm.usuario.Usuario;
 
@@ -16,9 +20,11 @@ import ar.com.edu.unju.edm.usuario.Usuario;
 public class UsuarioControlador {
 
 	@Autowired
-	private UsuarioServicio servicio;
+	UsuarioServicio servicio;
 	@Autowired
 	Usuario usuario;
+	@Autowired
+	UsuarioPreguntaServicio usuarioPreguntaServicio;
 	@GetMapping("/login")
   public ModelAndView getlogin(){
     ModelAndView vista= new ModelAndView("index");
@@ -71,8 +77,29 @@ public class UsuarioControlador {
 		return "redirect:/listarusuarios";
 	}
 
+	@GetMapping("/vernota1")
+	public String vernota(Model modelo) {
+		Authentication auth = SecurityContextHolder
+        .getContext()
+        .getAuthentication();
+    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		modelo.addAttribute("puntaje", usuarioPreguntaServicio.SumarPuntaje(usuarioPreguntaServicio.buscarPorIdUsuario(Long.parseLong(userDetail.getUsername()), 1)));
+		return "resultados"; 
+	}
+	@GetMapping("/vernota2")
+	public String vernota2(Model modelo) {
+		Authentication auth = SecurityContextHolder
+        .getContext()
+        .getAuthentication();
+    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		modelo.addAttribute("puntaje", usuarioPreguntaServicio.SumarPuntaje(usuarioPreguntaServicio.buscarPorIdUsuario(Long.parseLong(userDetail.getUsername()), 2)));
+		return "resultados"; 
+	}
 	@GetMapping("/vernota/{id}")
-	public String vernota(@PathVariable Long id, Model modelo) {
-		return "editar_usuario"; 
+	public String vernotadocente(Model modelo,@PathVariable Long id) {
+		Usuario aux=new Usuario();
+		aux=servicio.obtenerUsuarioporId(id);
+		modelo.addAttribute("puntaje", usuarioPreguntaServicio.SumarPuntaje(usuarioPreguntaServicio.buscarPorIdUsuario(aux.getDni(), 1)));
+		return "resultados_docente"; 
 	}
 }

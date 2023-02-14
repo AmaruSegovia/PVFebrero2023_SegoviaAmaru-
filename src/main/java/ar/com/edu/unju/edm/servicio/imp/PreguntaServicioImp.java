@@ -18,14 +18,38 @@ public class PreguntaServicioImp implements PreguntaServicio {
   @Override
   public List<Pregunta> listarPreguntasPorNivel(Integer nivel) {
     List<Pregunta> auxiliar = new ArrayList<>();
-      List<Pregunta> aux2=new ArrayList<>();
-      auxiliar=(List<Pregunta>) preguntaRepositorio.findAll();
-      for (int i = 0; i < auxiliar.size(); i++) {
-        if(auxiliar.get(i).getNivel().equals(nivel)){
-          aux2.add(auxiliar.get(i));
-        }
+    List<Pregunta> aux2=new ArrayList<>();
+    auxiliar=(List<Pregunta>) preguntaRepositorio.findAll();
+    for (int i = 0; i < auxiliar.size(); i++) {
+      if(auxiliar.get(i).getNivel().equals(nivel)){
+         aux2.add(auxiliar.get(i));
       }
-      return aux2;
+    }
+    return aux2;
   }
 
+  @Override
+  public Pregunta buscarPregunta(Integer nivel, int i) {
+    List<Pregunta> preguntas= listarPreguntasPorNivel(nivel);
+    Pregunta aux=null;
+    for (int j = 0; j < i; j++) {
+      aux=preguntas.get(j);
+    }
+    return aux;
+  }
+
+  @Override
+  public void guardarPregunta(Pregunta pregunta) {
+		pregunta.setEstado(true);
+		preguntaRepositorio.save(pregunta);
+  }
+
+  @Override
+  public Pregunta actualizarPregunta(Pregunta pregunta) {
+    return preguntaRepositorio.save(pregunta);
+  }
+  @Override
+	public Pregunta obtenerPreguntaporId(Long id) {
+		return preguntaRepositorio.findById(id).get();
+	}
 }

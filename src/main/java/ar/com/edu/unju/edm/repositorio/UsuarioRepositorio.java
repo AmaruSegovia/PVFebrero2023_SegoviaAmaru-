@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 import ar.com.edu.unju.edm.usuario.Usuario;
 
 @Repository
-public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
+
 }
